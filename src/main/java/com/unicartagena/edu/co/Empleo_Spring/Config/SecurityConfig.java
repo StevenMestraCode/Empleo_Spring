@@ -48,7 +48,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         // Rutas públicas (login, recuperar, css, js)
-                        .requestMatchers("/login", "/recuperar", "/recuperar/enviar", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/login", "/recuperar", "/recuperar/enviar", "/css/**", "/js/**", "/healthz").permitAll()
                         // TODO lo demás solo requiere estar autenticado (sin importar el rol)
                         .anyRequest().authenticated()
                 )

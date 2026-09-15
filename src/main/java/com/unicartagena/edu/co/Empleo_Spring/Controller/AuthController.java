@@ -48,4 +48,9 @@ public class AuthController {
         model.addAttribute("titulo", "Sistema de Gestión de Empleo");
         return "index";
     }
+    @GetMapping("/healthz")
+    @ResponseBody
+    public String healthz() {
+        return "OK";
+    }
 }
