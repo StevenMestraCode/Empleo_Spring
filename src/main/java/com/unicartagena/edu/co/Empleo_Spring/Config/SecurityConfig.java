@@ -1,10 +1,9 @@
 package com.unicartagena.edu.co.Empleo_Spring.Config;
 
-import com.unicartagena.edu.co.Empleo_Spring.Service.UsuarioService;  // ← OJO: Services (plural)
+import com.unicartagena.edu.co.Empleo_Spring.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,8 +20,6 @@ public class SecurityConfig {
     @Autowired
     private UsuarioService usuarioService;
 
-    // ⚠️ PasswordEncoder ya NO se define aquí, está en PasswordConfig
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -37,7 +34,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService());
         provider.setPasswordEncoder(passwordEncoder);
@@ -46,15 +43,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authenticationProvider(authenticationProvider());
+
         http
                 .authorizeHttpRequests(auth -> auth
+                        // Rutas públicas (login, recuperar, css, js)
                         .requestMatchers("/login", "/recuperar", "/recuperar/enviar", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/usuarios/**").hasRole("ADMIN")
+                        // TODO lo demás solo requiere estar autenticado (sin importar el rol)
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/", true)
+                        .failureUrl("/login?error")
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -62,6 +64,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 );
+
         return http.build();
     }
 }
