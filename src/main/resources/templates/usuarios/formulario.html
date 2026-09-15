@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Formulario Usuario</title>
+</head>
+<body>
+<h1 th:text="${titulo}">Formulario Usuario</h1>
+
+<form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <table cellpadding="8" cellspacing="0">
+        <tr>
+            <td><label>Nombre:</label></td>
+            <td><input type="text" th:field="*{nombre}" required/></td>
+        </tr>
+        <tr>
+            <td><label>Correo:</label></td>
+            <td><input type="email" th:field="*{correo}" required/></td>
+        </tr>
+        <tr>
+            <td><label>Clave:</label></td>
+            <td><input type="password" th:field="*{clave}" required/></td>
+        </tr>
+        <tr>
+            <td><label>Rol:</label></td>
+            <td>
+                <select th:field="*{rol}">
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="USER">USER</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">Guardar</button>
+                <button type="button" th:onclick="|window.location.href='@{/usuarios}'|">Cancelar</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
