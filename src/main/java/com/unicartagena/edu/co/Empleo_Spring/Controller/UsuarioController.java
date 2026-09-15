@@ -89,4 +89,14 @@ public class UsuarioController {
         model.addAttribute("titulo", "Reporte: Usuarios por Nombre");
         return "usuarios/reporte_nombre";
     }
+    @GetMapping("/ver/{id}")
+    public String verPorId(@PathVariable Long id, Model model) {
+        Optional<Usuario> usuario = usuarioService.buscarPorId(id);
+        if (usuario.isEmpty()) {
+            return "redirect:/usuarios";
+        }
+        model.addAttribute("usuario", usuario.get());
+        model.addAttribute("titulo", "Detalle del Usuario");
+        return "usuarios/ver";
+    }
 }
