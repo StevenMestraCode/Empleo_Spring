@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${titulo}">Empleos</title>
+</head>
+<body>
+<h1 th:text="${titulo}">Lista de Empleos</h1>
+
+<div th:if="${exito}" style="color:green;" th:text="${exito}"></div>
+
+<br>
+
+<button type="button" th:onclick="|window.location.href='@{/empleos/nuevo}'|">Nuevo Empleo</button>
+<button type="button" th:onclick="|window.location.href='@{/empleos/reporte/categoria}'|">Reporte por Categoría</button>
+<button type="button" th:onclick="|window.location.href='@{/empleos/reporte/empresa}'|">Reporte por Empresa</button>
+
+<br><br>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+  <tr>
+    <th>ID</th><th>Nombre</th><th>Categoría</th><th>Área</th>
+    <th>Empresa</th><th>Nivel</th><th>Sueldo</th><th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="e : ${empleos}">
+    <td th:text="${e.id}"></td>
+    <td th:text="${e.nombre}"></td>
+    <td th:text="${e.categoria}"></td>
+    <td th:text="${e.areaTrabajo}"></td>
+    <td th:text="${e.empresa}"></td>
+    <td th:text="${e.nivel}"></td>
+    <td th:text="${e.sueldo}"></td>
+    <td>
+      <button type="button" th:onclick="|window.location.href='@{/empleos/ver/{id}(id=${e.id})}'|">Ver</button>
+      <button type="button" th:onclick="|window.location.href='@{/empleos/editar/{id}(id=${e.id})}'|">Editar</button>
+      <button type="button"
+              th:onclick="|if(confirm('¿Eliminar este empleo?')) window.location.href='@{/empleos/eliminar/{id}(id=${e.id})}'|">
+        Eliminar
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
+
+<button type="button" th:onclick="|window.location.href='@{/}'|">Volver al Inicio</button>
+</body>
+</html>

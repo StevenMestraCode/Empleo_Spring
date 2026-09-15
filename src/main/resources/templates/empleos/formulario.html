@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${titulo}">Formulario Empleo</title>
+</head>
+<body>
+<h1 th:text="${titulo}">Formulario Empleo</h1>
+
+<form th:action="@{/empleos/guardar}" th:object="${empleo}" method="post">
+  <input type="hidden" th:field="*{id}"/>
+
+  <table cellpadding="8" cellspacing="0">
+    <tr><td><label>Nombre:</label></td><td><input type="text" th:field="*{nombre}" required/></td></tr>
+    <tr><td><label>Categoría:</label></td><td><input type="text" th:field="*{categoria}"/></td></tr>
+    <tr><td><label>Área de Trabajo:</label></td><td><input type="text" th:field="*{areaTrabajo}"/></td></tr>
+    <tr><td><label>Empresa:</label></td><td><input type="text" th:field="*{empresa}"/></td></tr>
+    <tr><td><label>Nivel:</label></td><td><input type="text" th:field="*{nivel}"/></td></tr>
+    <tr><td><label>Sueldo:</label></td><td><input type="text" th:field="*{sueldo}"/></td></tr>
+    <tr><td><label>Funciones:</label></td><td><textarea th:field="*{funciones}" rows="3"></textarea></td></tr>
+    <tr><td><label>Cargo Jefe:</label></td><td><input type="text" th:field="*{cargoJefe}"/></td></tr>
+    <tr>
+      <td colspan="2">
+        <button type="submit">Guardar</button>
+        <button type="button" th:onclick="|window.location.href='@{/empleos}'|">Cancelar</button>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
