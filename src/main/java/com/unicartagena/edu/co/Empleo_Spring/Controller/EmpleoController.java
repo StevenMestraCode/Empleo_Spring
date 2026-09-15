@@ -84,4 +84,15 @@ public class EmpleoController {
         model.addAttribute("titulo", "Reporte: Empleos por Empresa");
         return "empleos/reporte_empresa";
     }
+    // ==================== VER POR ID ====================
+    @GetMapping("/ver/{id}")
+    public String verPorId(@PathVariable Long id, Model model) {
+        Optional<Empleo> empleo = empleoService.buscarPorId(id);
+        if (empleo.isEmpty()) {
+            return "redirect:/empleos";
+        }
+        model.addAttribute("empleo", empleo.get());
+        model.addAttribute("titulo", "Detalle del Empleo");
+        return "empleos/ver";
+    }
 }
