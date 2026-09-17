@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte por Rol</title>
+</head>
+<body>
+<h1>Reporte: Usuarios por Rol</h1>
+
+<form th:action="@{/usuarios/reporte/rol}" method="get">
+  <label>Rol:</label>
+  <input type="text" name="rol" th:value="${rolBuscado}"/>
+  <button type="submit">Buscar</button>
+</form>
+
+<br>
+
+<table border="1" cellpadding="10" cellspacing="0"
+       th:if="${usuarios != null and !#lists.isEmpty(usuarios)}">
+  <tr><th>ID</th><th>Nombre</th><th>Correo</th><th>Rol</th></tr>
+  <tr th:each="u : ${usuarios}">
+    <td th:text="${u.id}"></td>
+    <td th:text="${u.nombre}"></td>
+    <td th:text="${u.correo}"></td>
+    <td th:text="${u.rol}"></td>
+  </tr>
+</table>
+
+<p th:if="${usuarios != null and #lists.isEmpty(usuarios)}" style="color:red;">
+  No se encontraron resultados.
+</p>
+
+<br>
+<button type="button" th:onclick="|window.location.href='@{/usuarios}'|">Volver</button>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle Empleo</title>
+</head>
+<body>
+<h1 th:text="${titulo}">Detalle del Empleo</h1>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <tr><th>ID</th><td th:text="${empleo.id}"></td></tr>
+  <tr><th>Nombre</th><td th:text="${empleo.nombre}"></td></tr>
+  <tr><th>Categoría</th><td th:text="${empleo.categoria}"></td></tr>
+  <tr><th>Área de Trabajo</th><td th:text="${empleo.areaTrabajo}"></td></tr>
+  <tr><th>Empresa</th><td th:text="${empleo.empresa}"></td></tr>
+  <tr><th>Nivel</th><td th:text="${empleo.nivel}"></td></tr>
+  <tr><th>Sueldo</th><td th:text="${empleo.sueldo}"></td></tr>
+  <tr><th>Funciones</th><td th:text="${empleo.funciones}"></td></tr>
+  <tr><th>Cargo Jefe</th><td th:text="${empleo.cargoJefe}"></td></tr>
+</table>
+
+<br>
+<button type="button" th:onclick="|window.location.href='@{/empleos}'|">Volver</button>
+</body>
+</html>

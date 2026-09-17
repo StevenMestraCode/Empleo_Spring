@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${titulo}">Usuarios</title>
+</head>
+<body>
+<h1 th:text="${titulo}">Lista de Usuarios</h1>
+
+<div th:if="${exito}" style="color:green;" th:text="${exito}"></div>
+<div th:if="${error}" style="color:red;" th:text="${error}"></div>
+
+<br>
+
+<button type="button" th:onclick="|window.location.href='@{/usuarios/nuevo}'|">Nuevo Usuario</button>
+<button type="button" th:onclick="|window.location.href='@{/usuarios/reporte/rol}'|">Reporte por Rol</button>
+<button type="button" th:onclick="|window.location.href='@{/usuarios/reporte/nombre}'|">Reporte por Nombre</button>
+
+<br><br>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+  <tr>
+    <th>ID</th><th>Nombre</th><th>Correo</th><th>Rol</th><th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="u : ${usuarios}">
+    <td th:text="${u.id}"></td>
+    <td th:text="${u.nombre}"></td>
+    <td th:text="${u.correo}"></td>
+    <td th:text="${u.rol}"></td>
+    <td>
+      <button type="button" th:onclick="|window.location.href='@{/usuarios/ver/{id}(id=${u.id})}'|">Ver</button>
+      <button type="button" th:onclick="|window.location.href='@{/usuarios/editar/{id}(id=${u.id})}'|">Editar</button>
+      <button type="button"
+              th:onclick="|if(confirm('¿Eliminar este usuario?')) window.location.href='@{/usuarios/eliminar/{id}(id=${u.id})}'|">
+        Eliminar
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
+
+<button type="button" th:onclick="|window.location.href='@{/}'|">Volver al Inicio</button>
+</body>
+</html>

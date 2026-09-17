@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+</head>
+<body>
+<h1 th:text="${titulo}">Sistema de Gestión de Empleo</h1>
+
+<p>Bienvenido al sistema. Selecciona una opción para comenzar.</p>
+
+<br>
+
+<button type="button" th:onclick="|window.location.href='@{/usuarios}'|">Gestionar Usuarios</button>
+<button type="button" th:onclick="|window.location.href='@{/empleos}'|">Gestionar Empleos</button>
+
+<br><br>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Cerrar Sesión</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Recuperar Contraseña</title>
+</head>
+<body>
+<h1>Recuperar Contraseña</h1>
+
+<div th:if="${error}" style="color:red;" th:text="${error}"></div>
+
+<br>
+
+<form th:action="@{/recuperar/enviar}" method="post">
+  <table cellpadding="8" cellspacing="0">
+    <tr>
+      <td><label for="correo">Correo registrado:</label></td>
+      <td><input type="email" id="correo" name="correo" required autofocus/></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button type="submit">Enviar clave temporal</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<br>
+<button type="button" th:onclick="|window.location.href='@{/login}'|">Volver al login</button>
+</body>
+</html>

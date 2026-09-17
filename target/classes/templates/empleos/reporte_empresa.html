@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte por Empresa</title>
+</head>
+<body>
+<h1>Reporte: Empleos por Empresa</h1>
+
+<form th:action="@{/empleos/reporte/empresa}" method="get">
+  <label>Empresa:</label>
+  <input type="text" name="empresa" th:value="${empresaBuscada}"/>
+  <button type="submit">Buscar</button>
+</form>
+
+<br>
+
+<table border="1" cellpadding="10" cellspacing="0"
+       th:if="${empleos != null and !#lists.isEmpty(empleos)}">
+  <tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Empresa</th><th>Sueldo</th></tr>
+  <tr th:each="e : ${empleos}">
+    <td th:text="${e.id}"></td>
+    <td th:text="${e.nombre}"></td>
+    <td th:text="${e.categoria}"></td>
+    <td th:text="${e.empresa}"></td>
+    <td th:text="${e.sueldo}"></td>
+  </tr>
+</table>
+
+<p th:if="${empleos != null and #lists.isEmpty(empleos)}" style="color:red;">
+  No se encontraron resultados.
+</p>
+
+<br>
+<button type="button" th:onclick="|window.location.href='@{/empleos}'|">Volver</button>
+</body>
+</html>
