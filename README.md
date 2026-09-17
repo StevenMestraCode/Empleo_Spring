@@ -179,47 +179,6 @@ El proyecto usa **variables de entorno** para las credenciales (buena práctica,
 | `DB_PASS` | Contraseña de la base de datos | `********` |
 | `PORT` | Puerto del servidor (Render lo asigna) | `8080` |
 
-### `application.properties`
-
-```properties
-spring.application.name=Empleo_Spring
-
-# Servidor
-server.port=${PORT:8080}
-
-# Base de datos
-spring.datasource.url=${DB_URL}
-spring.datasource.username=${DB_USER}
-spring.datasource.password=${DB_PASS}
-spring.datasource.driver-class-name=org.postgresql.Driver
-
-# JPA / Hibernate
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.properties.hibernate.format_sql=true
-
-# Correo (Gmail)
-spring.mail.host=smtp.gmail.com
-spring.mail.port=587
-spring.mail.username=stevenmestra3@gmail.com
-spring.mail.password=sbzzspynwucffupt
-spring.mail.properties.mail.smtp.auth=true
-spring.mail.properties.mail.smtp.starttls.enable=true
-spring.mail.properties.mail.smtp.starttls.required=true
-
-app.mail.remitente=stevenmestra3@gmail.com
-
-# HikariCP
-spring.datasource.hikari.max-lifetime=240000
-spring.datasource.hikari.idle-timeout=120000
-spring.datasource.hikari.connection-timeout=30000
-spring.datasource.hikari.minimum-idle=2
-spring.datasource.hikari.maximum-pool-size=10
-```
-
----
-
 ## Cómo ejecutar la aplicación desde IntelliJ IDEA:
 
 1. Abre el proyecto en IntelliJ.
